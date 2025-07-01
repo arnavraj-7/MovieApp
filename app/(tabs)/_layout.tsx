@@ -1,42 +1,18 @@
-import React from 'react'
-import { Tabs } from 'expo-router'
-import { ImageBackground } from 'expo-image'
-import { images } from '@/constants/images'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MyTabBar from './../../components/tabbar'; // 
+import Index from './index';
+import Search from './Search';
+import Saved from './Saved';
 
-const _layout = () => {
+const Tab = createBottomTabNavigator();
+
+export default function MyTabs() {
   return (
-  <Tabs>
-    <Tabs.Screen
-    name="index"
-    options={{
-        title:"Home",
-        headerShown:false
-        
-    }}/>
-    <Tabs.Screen
-    name='search'
-    options={{
-        title:"Search",
-        headerShown:false,
-        tabBarIcon:({focused})=>{
-            return (
-                <>
-                <ImageBackground source ={images.highlight}/>
-
-                </>
-            )
-        }
-    }}/>
-    <Tabs.Screen 
-    name='saved'
-    options={{
-        title:"Saved",
-        headerShown:false
-    }}
-
-    />
-  </Tabs>
-  )
+    <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Home" component={Index} />
+      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Saved" component={Saved} />
+    </Tab.Navigator>
+  );
 }
-
-export default _layout
