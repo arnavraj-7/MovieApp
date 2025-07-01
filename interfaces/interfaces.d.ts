@@ -1,18 +1,49 @@
 interface Movie {
   id: number;
   title: string;
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  original_language: string;
-  original_title: string;
-  overview: string;
+  url: string;
+  status: string;
+  airing: boolean;
+  rating: string;
   popularity: number;
-  poster_path: string;
-  release_date: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
+  producers: [
+    {
+      mal_id: number;
+      type: string;
+      name: string;
+      url: string;
+    },
+  ];
+  studios: [
+    {
+      mal_id: 0;
+      type: string;
+      name: string;
+      url: string;
+    },
+  ];
+  type: string;
+  genre: string[];
+  overview: string;
+  imageurl: {
+    jpg: {
+      image_url: string;
+      small_image_url: string;
+      large_image_url: string;
+    };
+    webp: {
+      image_url: string;
+      small_image_url: string;
+      large_image_url: string;
+    };
+  };
+  trailer: {
+    youtube_id: string;
+    url: string;
+    embed_url: string;
+  };
+  released: number;
+  synopsis: string;
 }
 
 interface TrendingMovie {
