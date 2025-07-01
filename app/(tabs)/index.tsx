@@ -1,12 +1,17 @@
 import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'expo-image';
 import Search from './Search';
 import SearchBar from '@/components/searchbar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import useMovies from '../hooks/useMovie';
 
 const Index = () => {
+  const {fetchMovies,data} = useMovies();
+  useEffect(()=>{
+    fetchMovies();
+  },[fetchMovies]);
   return (
     <View className={"bg-[#030014] flex-1"}>
       <Image 
@@ -62,6 +67,9 @@ const Index = () => {
         contentContainerStyle={{minHeight:'100%',paddingBottom:10,zIndex:1}}
       >
         <SearchBar/>
+        <View>
+          {data}
+        </View>
       </ScrollView>
     </View>
   );
