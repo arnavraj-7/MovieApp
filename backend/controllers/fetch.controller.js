@@ -1,14 +1,16 @@
 import axios from 'axios';
-// const fetchMovies = async(req,res)=>{
-//     try{
-//         const movies = await Movie.find({});
-//         res.status(200).json(movies);
-//         console.log("Movies sent");
-//     }catch(error){
-//         console.log(error);
-//     }
-// }
-// export default fetchMovies
+
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { HumanMessage } from "@langchain/core/messages";
+import dotenv from 'dotenv';
+dotenv.config();
+
+
+const model = new ChatGoogleGenerativeAI({
+  model: "gemini-pro",
+  maxOutputTokens: 2048,
+});
+
 
 const fetchTop = async (req,res) => {
     try {
@@ -48,6 +50,16 @@ const fetchbyId = async (req,res) => {
       res.status(500).json({"error":error.message})
       console.log(error.message);
   }
+}
+
+const chat = async (req,res)=>{
+    try{
+        const message = req.body;
+        const response = await model.invoke(new HumanMessage("Hello world!"));
+        res.status(200).json(response);
+    }catch(error){
+        res.status(500).json({"error":error.message})
+    }
 }
 
 
