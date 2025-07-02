@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { HumanMessage } from "@langchain/core/messages";
+import { AIMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
 import dotenv from 'dotenv';
 dotenv.config();
 
 
 const model = new ChatGoogleGenerativeAI({
-  model: "gemini-pro",
+  model: "gemini-2.0-flash",
   maxOutputTokens: 2048,
 });
 
@@ -52,17 +52,39 @@ const fetchbyId = async (req,res) => {
   }
 }
 
-const chat = async (req,res)=>{
-    try{
-        const message = req.body;
-        const response = await model.invoke(new HumanMessage("Hello world!"));
-        res.status(200).json(response);
-    }catch(error){
-        res.status(500).json({"error":error.message})
-    }
-}
+const chat = async (req, res) => {
+  try {
+    const { messages } = req.body; 
+    console.log("messages",messages);
+    const formattedMessages = [new SystemMessage(
+        "You are an anime expert and your job is to only answer questions related to anime. \
+        Speak in a friendly, conversational tone like a fellow fan. \
+        If the user asks anything unrelated to anime — including math, general knowledge, coding, science, or other topics — politely respond that you're only here to talk about anime and cannot help with anything else."
+    )]
+    messages.map((message) => {
+        
+        if(message.role === 'assistant'){
+            formattedMessages.push(new AIMessage(message.content));
+        }else if(message.role==='user'){
+            formattedMessages.push(new HumanMessage(message.content));
+        }
+    });
+    console.log("called chat!",formattedMessages);
+    const response = await model.invoke(
+     formattedMessages
+    );
+
+    res.status(200).json({ response: response.content });
+    console.log(response.content);
+    return 
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    console.log(error.message);
+  }
+};
 
 
 
 
-export  {fetchTop,fetchUpcoming,fetchbyId}
+
+export  {fetchTop,fetchUpcoming,fetchbyId,chat}
