@@ -8,7 +8,6 @@ import { Link } from "expo-router";
 import { ScrollView } from "react-native";
 import RecomCard from "@/components/recomCard";
 import { LinearGradient } from "expo-linear-gradient";
-import Card from "@/components/card";
 
 // const anime = {
 //   data: {
@@ -369,6 +368,29 @@ const MovieDetails = () => {
       </View>
     );
   }
+  if(anime===undefined){
+    return (
+      <View
+        style={{
+          backgroundColor: "#0a0a0f",
+          minHeight: "100%",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            color: "#ffffff",
+            fontSize: 24,
+            fontWeight: "bold",
+          }}
+        >
+          Anime not found
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView
@@ -424,7 +446,7 @@ const MovieDetails = () => {
                 className="text-white text-2xl font-bold mb-1"
                 numberOfLines={2}
               >
-                {anime.title_english || anime.title}
+                {anime?.title_english || anime.title}
               </Text>
               <Text className="text-gray-300 text-sm mb-2" numberOfLines={1}>
                 {anime.title_japanese}
@@ -447,19 +469,19 @@ const MovieDetails = () => {
               {/* Quick Stats */}
               <View className="gap-1">
                 <Text className="text-gray-400 text-xs">
-                  {anime.type} • {anime.episodes} episodes • {anime.duration}
+                  {anime?.type} • {anime?.episodes} episodes • {anime?.duration}
                 </Text>
                 <Text className="text-gray-400 text-xs">
-                  {anime.aired.string}
+                  {anime?.aired.string}
                 </Text>
-                <Text className="text-gray-400 text-xs">{anime.status}</Text>
+                <Text className="text-gray-400 text-xs">{anime?.status}</Text>
               </View>
             </View>
           </View>
 
           {/* Genres */}
           <View className="flex-row flex-wrap gap-2 mt-6">
-            {anime.genres.map((genre, index) => (
+            {anime?.genres.map((genre, index) => (
               <View
                 key={index}
                 className="bg-gray-800 px-3 py-1 rounded-full border border-gray-700"
@@ -684,7 +706,7 @@ const MovieDetails = () => {
               Studio
             </Text>
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
-              {anime.studios.map((studio, index) => (
+              {anime?.studios.map((studio, index) => (
                 <LinearGradient
                   key={index}
                   colors={["#dc2626", "#ef4444", "#f87171"]}
