@@ -1,108 +1,106 @@
-interface Movie {
-  id: number;
-  title: string;
+interface AnimeImages {
+  image_url: string;
+  small_image_url: string;
+  large_image_url: string;
+}
+
+interface AnimeImageFormats {
+  jpg: AnimeImages;
+  webp: AnimeImages;
+}
+
+interface TrailerImages {
+  image_url: string;
+  small_image_url: string;
+  medium_image_url: string;
+  large_image_url: string;
+  maximum_image_url: string;
+}
+
+interface Trailer {
+  youtube_id: string;
   url: string;
+  embed_url: string;
+  images: TrailerImages;
+}
+
+interface AnimeTitle {
+  type: string;
+  title: string;
+}
+
+interface DateProp {
+  day: number;
+  month: number;
+  year: number;
+}
+
+interface AiredInfo {
+  from: string;
+  to: string;
+  prop: {
+    from: DateProp;
+    to: DateProp;
+  };
+  string: string;
+}
+
+interface BroadcastInfo {
+  day: string;
+  time: string;
+  timezone: string;
+  string: string;
+}
+
+interface AnimeEntity {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+interface AnimeGenre {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+interface Anime {
+  mal_id: number;
+  url: string;
+  images: AnimeImageFormats;
+  trailer: Trailer;
+  approved: boolean;
+  titles: AnimeTitle[];
+  title: string;
+  title_english: string;
+  title_japanese: string;
+  title_synonyms: string[];
+  type: string;
+  source: string;
+  episodes: number;
   status: string;
   airing: boolean;
+  aired: AiredInfo;
+  duration: string;
   rating: string;
+  score: number;
+  scored_by: number;
+  rank: number;
   popularity: number;
-  producers: [
-    {
-      mal_id: number;
-      type: string;
-      name: string;
-      url: string;
-    },
-  ];
-  studios: [
-    {
-      mal_id: 0;
-      type: string;
-      name: string;
-      url: string;
-    },
-  ];
-  type: string;
-  genre: string[];
-  overview: string;
-  imageurl: {
-    jpg: {
-      image_url: string;
-      small_image_url: string;
-      large_image_url: string;
-    };
-    webp: {
-      image_url: string;
-      small_image_url: string;
-      large_image_url: string;
-    };
-  };
-  trailer: {
-    youtube_id: string;
-    url: string;
-    embed_url: string;
-  };
-  released: number;
+  members: number;
+  favorites: number;
   synopsis: string;
-}
-
-interface TrendingMovie {
-  searchTerm: string;
-  movie_id: number;
-  title: string;
-  count: number;
-  poster_url: string;
-}
-
-interface MovieDetails {
-  adult: boolean;
-  backdrop_path: string | null;
-  belongs_to_collection: {
-    id: number;
-    name: string;
-    poster_path: string;
-    backdrop_path: string;
-  } | null;
-  budget: number;
-  genres: {
-    id: number;
-    name: string;
-  }[];
-  homepage: string | null;
-  id: number;
-  imdb_id: string | null;
-  original_language: string;
-  original_title: string;
-  overview: string | null;
-  popularity: number;
-  poster_path: string | null;
-  production_companies: {
-    id: number;
-    logo_path: string | null;
-    name: string;
-    origin_country: string;
-  }[];
-  production_countries: {
-    iso_3166_1: string;
-    name: string;
-  }[];
-  release_date: string;
-  revenue: number;
-  runtime: number | null;
-  spoken_languages: {
-    english_name: string;
-    iso_639_1: string;
-    name: string;
-  }[];
-  status: string;
-  tagline: string | null;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
-
-interface TrendingCardProps {
-  movie: TrendingMovie;
-  index: number;
+  background: string;
+  season: string;
+  year: number;
+  broadcast: BroadcastInfo;
+  producers: AnimeEntity[];
+  licensors: AnimeEntity[];
+  studios: AnimeEntity[];
+  genres: AnimeGenre[];
+  explicit_genres: AnimeGenre[];
+  themes: AnimeGenre[];
+  demographics: AnimeGenre[];
 }
