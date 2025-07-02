@@ -63,11 +63,11 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
               isFocused && styles.focusedTab // Add focused state styling
             ]}
           >
-                  <Ionicons name={getIcons(label)} size={32} color={isFocused ? '#ffffff' : '#888888'} />
+                  <Ionicons name={getIcons(label)} size={32} color={isFocused ? '#ffffff' : '#666666'} />
             <Text 
               style={[
                 styles.labelStyle,
-                { color: isFocused ? '#ffffff' : '#888888' }
+                { color: isFocused ? '#ffffff' : '#666666' }
               ]}
             >
               {label}
@@ -92,19 +92,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 20,
     marginBottom: 20,
-    borderRadius: 12,
-    backgroundColor: '#0f0D23', 
+    borderRadius: 16,
+    backgroundColor: 'black', 
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 12,
+    elevation: 12,
   },
   tabs: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
-    borderRadius: 12, 
-  },
-  focusedTab: {
-    backgroundColor: '#8B5CF6',
-    borderRadius: 12,
+    borderRadius: 14, 
+    marginHorizontal: 2,
   },
   iconStyle: {
     width: 20,
@@ -113,6 +118,6 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });
