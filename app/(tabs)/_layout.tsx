@@ -4,6 +4,7 @@ import MyTabBar from './../../components/tabbar'; //
 import Index from './index';
 import Search from './Search';
 import Saved from './Saved';
+import Chat from '../chatbot/chat';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,6 +14,7 @@ export default function MyTabs() {
       <Tab.Screen name="Home" component={Index} />
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Saved" component={Saved} />
+      <Tab.Screen name="Chat" component={Chat} />
     </Tab.Navigator>
   );
 }
