@@ -17,7 +17,7 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
         const isFocused = state.index === index;
         
-        const getIcons = (icon: string): 'home' | 'search' | 'bookmark'=> {
+        const getIcons = (icon: string): 'home' | 'search' | 'bookmark' | 'chatbubbles'=> {
           switch (icon) {
             case 'Home':
               return 'home';
@@ -25,6 +25,8 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
               return 'search';
             case 'Saved':
               return 'bookmark';
+            case 'Chat':
+              return 'chatbubbles';
             default:
               return icons.home;
           }
