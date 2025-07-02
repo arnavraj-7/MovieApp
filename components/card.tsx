@@ -38,8 +38,8 @@ const Card = ({anime}:{anime:Anime}) => {
                   <Image
                     className="object-cover"
                     source={
-                      anime.images.jpg?.large_image_url ||
-                      anime.images.webp?.image_url
+                      anime.images?.jpg?.large_image_url ||
+                      anime.images?.webp?.image_url
                     }
                     style={{ 
                       width: "100%", 
@@ -160,10 +160,10 @@ const Card = ({anime}:{anime:Anime}) => {
                         ? Math.floor(anime.favorites / 1000)
                         : anime.favorites}k favorites
                     </Text>
-                  </View>
+                  </View> 
 
                   {/* Type and Episodes */}
-                  <Text style={{
+                   <Text style={{
                     color: '#aaaaaa',
                     fontSize: 11,
                     fontWeight: '500',
@@ -171,18 +171,18 @@ const Card = ({anime}:{anime:Anime}) => {
                   }}>
                     {anime.type} • {anime.episodes}
                     {anime.type === "anime" ? "" : " episodes"}
-                  </Text>
+                  </Text> 
 
                   {/* Genre Tags */}
-                  <View style={{
+                   <View style={{
                     flexDirection: 'row',
                     flexWrap: 'wrap',
-                    gap: 4,
+                    gap: 2,
                     marginTop: 'auto',
                   }}>
                     <View style={{
                       backgroundColor: '#333333',
-                      paddingHorizontal: 6,
+                      paddingHorizontal: 4,
                       paddingVertical: 3,
                       borderRadius: 6,
                       borderWidth: 1,
@@ -190,7 +190,7 @@ const Card = ({anime}:{anime:Anime}) => {
                     }}>
                       <Text style={{
                         color: '#cccccc',
-                        fontSize: 9,
+                        fontSize: 7,
                         fontWeight: '600',
                         textTransform: 'uppercase',
                         letterSpacing: 0.3,
@@ -210,31 +210,12 @@ const Card = ({anime}:{anime:Anime}) => {
                       }}>
                         <Text style={{
                           color: '#cccccc',
-                          fontSize: 9,
+                          fontSize: 7,
                           fontWeight: '600',
                           textTransform: 'uppercase',
                           letterSpacing: 0.3,
                         }}>
                           {anime.genres[1]?.name}
-                        </Text>
-                      </View>
-                    )}
-                    
-                    {anime.genres.length > 2 && (
-                      <View style={{
-                        backgroundColor: '#2a2a2a',
-                        paddingHorizontal: 6,
-                        paddingVertical: 3,
-                        borderRadius: 6,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                        <Text style={{
-                          color: '#cccccc',
-                          fontSize: 9,
-                          fontWeight: '600',
-                        }}>
-                          +{anime.genres.length - 2}
                         </Text>
                       </View>
                     )}
