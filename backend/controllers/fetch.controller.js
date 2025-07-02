@@ -36,10 +36,13 @@ const fetchbyId = async (req,res) => {
   try {
     const {id} = req.params;
     console.log("id:",id);
-    console.log("url:",`https://api.jikan.moe/v4/anime//full`);
-      const anime = await axios.get(`https://api.jikan.moe/v4/anime/${id}/full`);
-      console.log(anime.data);
-      res.status(200).json(anime.data.data);
+    console.log("url:",`https://api.jikan.moe/v4/anime/full`);
+    const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/full`);
+    const animeData = response.data.data;
+    // console.log(animeData);
+    const recom = await axios.get(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
+        animeData.recommendations = recom.data;
+      res.status(200).json(animeData);
       // res.status(200).json({"message":"Success"})
   } catch (error) {
       res.status(500).json({"error":error.message})
