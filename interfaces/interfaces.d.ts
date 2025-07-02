@@ -65,6 +65,11 @@ interface AnimeGenre {
   name: string;
   url: string;
 }
+interface recom {
+  entry :{
+    images:AnimeImage;
+  }
+}
 
 interface Anime {
   mal_id: number;
@@ -103,4 +108,5 @@ interface Anime {
   explicit_genres: AnimeGenre[];
   themes: AnimeGenre[];
   demographics: AnimeGenre[];
+  recommendations: {data:recom[]};
 }
