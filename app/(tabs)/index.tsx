@@ -3,10 +3,12 @@ import React from "react";
 import { Image } from "expo-image";
 import SearchBar from "@/components/searchbar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from 'expo-linear-gradient';
 // import YoutubePlayer from "react-native-youtube-iframe";
 import Card from "@/components/card";
 // import useAnime from "../hooks/useanime";
 import {data,top,upcoming} from './../../data/data'
+
 const Index = () => {
   // const [loading, setLoading] = useState(false);
   // const [top,setTop] = useState<Anime[]>([]);
@@ -37,7 +39,7 @@ const Index = () => {
   //   );
   // }
   return (
-    <View style={{ backgroundColor: '#000000', flex: 1 ,paddingBottom:100}}>
+    <View style={{ backgroundColor: '#0a0a0a', flex: 1, paddingBottom: 100 }}>
       <Image
         source={require("./../../assets/images/bg.png")}
         style={{
@@ -46,7 +48,7 @@ const Index = () => {
           zIndex: 0,
           height: "50%",
           width: "100%",
-          opacity: 0.3,
+          opacity: 0.2,
         }}
         alt="highlight"
       />
@@ -71,24 +73,42 @@ const Index = () => {
             <View>
               <Text
                 style={{
-                  color: "#666666",
+                  color: "#888888",
                   fontSize: 16,
                   fontWeight: "400",
-                  marginBottom: 4,
+                  marginBottom: 8,
                 }}
               >
                 Welcome back! 👋
               </Text>
-              <Text
-                style={{
-                  color: "#FFFFFF",
-                  fontSize: 28,
-                  fontWeight: "700",
-                  letterSpacing: -0.5,
-                }}
-              >
-                animeVerse
-              </Text>
+              <View style={{ position: 'relative' }}>
+                <Text
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: 32,
+                    fontWeight: "800",
+                    letterSpacing: -1,
+                    textShadowColor: 'rgba(255, 107, 107, 0.3)',
+                    textShadowOffset: { width: 0, height: 2 },
+                    textShadowRadius: 8,
+                  }}
+                >
+                  anime
+                  <Text style={{ color: "#ff6b6b" }}>Verse</Text>
+                </Text>
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: -4,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    backgroundColor: '#ff6b6b',
+                    borderRadius: 2,
+                    opacity: 0.6,
+                  }}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -104,38 +124,147 @@ const Index = () => {
         }}
       >
         <SearchBar />
-        <Text className="text-white text-5xl font-bold mt-10">
-          Top Animes
-        </Text>
-        <ScrollView horizontal className="overflow-x-scroll" showsHorizontalScrollIndicator={false}>
-          <View className="flex flex-row gap-x-5 mt-10">
-            {top?.map((anime,index) => (
-             <Card anime={anime} key={index}/>
-            ))}
+        
+        {/* Top Animes Section */}
+        <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
+          <View style={{ 
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            marginBottom: 20,
+            position: 'relative'
+          }}>
+            <View style={{
+              backgroundColor: '#ff6b6b',
+              width: 4,
+              height: 40,
+              borderRadius: 2,
+              marginRight: 16,
+            }} />
+            <View style={{ flex: 1 }}>
+              <Text style={{
+                color: '#FFFFFF',
+                fontSize: 28,
+                fontWeight: '700',
+                letterSpacing: -0.5,
+                textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 4,
+              }}>
+                Top Animes
+              </Text>
+              <Text style={{
+                color: '#ff6b6b',
+                fontSize: 14,
+                fontWeight: '500',
+                marginTop: 2,
+                opacity: 0.8,
+              }}>
+                Most popular right now
+              </Text>
+            </View>
           </View>
-        </ScrollView>
-        <Text className="text-white text-5xl font-bold mt-10">
-          Random Animes
-             </Text>
-             <ScrollView horizontal className="overflow-x-scroll " showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal className="overflow-x-scroll" showsHorizontalScrollIndicator={false}>
+            <View className="flex flex-row gap-x-5">
+              {top?.map((anime,index) => (
+               <Card anime={anime} key={index}/>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
 
-           <View className="flex flex-row gap-x-5 mt-10">
-            {data?.map((anime,index) => (
-             <Card anime={anime} key={index}/>
-            ))}
+        {/* Random Animes Section */}
+        <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
+          <View style={{ 
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            marginBottom: 20,
+            position: 'relative'
+          }}>
+            <View style={{
+              backgroundColor: '#4ecdc4',
+              width: 4,
+              height: 40,
+              borderRadius: 2,
+              marginRight: 16,
+            }} />
+            <View style={{ flex: 1 }}>
+              <Text style={{
+                color: '#FFFFFF',
+                fontSize: 28,
+                fontWeight: '700',
+                letterSpacing: -0.5,
+                textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 4,
+              }}>
+                Random Animes
+              </Text>
+              <Text style={{
+                color: '#4ecdc4',
+                fontSize: 14,
+                fontWeight: '500',
+                marginTop: 2,
+                opacity: 0.8,
+              }}>
+                Discover something new
+              </Text>
+            </View>
           </View>
-             </ScrollView>
-           <Text className="text-white text-5xl font-bold mt-10">
-          Top Upcoming Animes
-             </Text>
-             <ScrollView horizontal className="overflow-x-scroll" showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal className="overflow-x-scroll" showsHorizontalScrollIndicator={false}>
+            <View className="flex flex-row gap-x-5">
+              {data?.map((anime,index) => (
+               <Card anime={anime} key={index}/>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
 
-            <View className="flex flex-row gap-x-5 mt-10">
-            {upcoming?.map((anime,index) => (
-             <Card anime={anime} key={index}/>
-            ))}
+        {/* Upcoming Animes Section */}
+        <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
+          <View style={{ 
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            marginBottom: 20,
+            position: 'relative'
+          }}>
+            <View style={{
+              backgroundColor: '#ffa726',
+              width: 4,
+              height: 40,
+              borderRadius: 2,
+              marginRight: 16,
+            }} />
+            <View style={{ flex: 1 }}>
+              <Text style={{
+                color: '#FFFFFF',
+                fontSize: 28,
+                fontWeight: '700',
+                letterSpacing: -0.5,
+                textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 4,
+              }}>
+                Upcoming Animes
+              </Text>
+              <Text style={{
+                color: '#ffa726',
+                fontSize: 14,
+                fontWeight: '500',
+                marginTop: 2,
+                opacity: 0.8,
+              }}>
+                Coming soon to watch
+              </Text>
+            </View>
           </View>
-             </ScrollView>
+          <ScrollView horizontal className="overflow-x-scroll" showsHorizontalScrollIndicator={false}>
+            <View className="flex flex-row gap-x-5">
+              {upcoming?.map((anime,index) => (
+               <Card anime={anime} key={index}/>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
       </ScrollView>
     </View>
   );
