@@ -7,7 +7,7 @@ import Card from "@/components/card";
 import useAnime from "../../hooks/useMovie";
 import MangaCard from "@/components/mangaCard";
 import { LoadingScreen } from "@/components/loading";
-import { MotiView } from 'moti'
+import { MotiView } from "moti";
 import CardSkeleton from "@/components/skeletonCard";
 
 const Index = () => {
@@ -20,7 +20,6 @@ const Index = () => {
   const [manga, setManga] = useState<Manga[]>([]);
   const [random, setRandom] = useState<Anime[]>([]);
   const { fetchRandom, fetchTop, fetchUpcoming, fetchManga } = useAnime();
-
 
   useEffect(() => {
     console.log("fetching");
@@ -37,19 +36,18 @@ const Index = () => {
         setTop(top);
         setLoading(false);
         await delay(1000);
-        
-        
+
         const random: Anime[] = await fetchRandom();
         setRandom(random);
         setLoadRandom(false);
         await delay(3000);
-        
+
         const upcoming: Anime[] = await fetchUpcoming();
         setUpcoming(upcoming);
         setLoadUpcoming(false);
 
         await delay(1000);
-        
+
         const manga: Manga[] = await fetchManga();
         setManga(manga);
         setLoadManga(false);
@@ -100,63 +98,58 @@ const Index = () => {
             }}
           >
             <MotiView
-            from={{
-
-              opacity:0
-            }}
-            animate={{
-  
-              opacity:1
-              
-            }}
-            transition={{
-              type:'timing',
-              duration:1000,
-              loop:false,
-            }}
+              from={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                type: "timing",
+                duration: 1000,
+                loop: false,
+              }}
             >
-              
-            
-            <View>
-              <Text
-                style={{
-                  color: "#888888",
-                  fontSize: 16,
-                  fontWeight: "400",
-                  marginBottom: 8,
-                }}
-              >
-                Welcome back! 👋
-              </Text>
-              <View style={{ position: "relative" }}>
+              <View>
                 <Text
                   style={{
-                    color: "#FFFFFF",
-                    fontSize: 32,
-                    fontWeight: "800",
-                    letterSpacing: -1,
-                    textShadowColor: "rgba(255, 107, 107, 0.3)",
-                    textShadowOffset: { width: 0, height: 2 },
-                    textShadowRadius: 8,
+                    color: "#888888",
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginBottom: 8,
                   }}
                 >
-                  anime
-                  <Text style={{ color: "#ff6b6b" }}>Verse</Text>
+                  Welcome back! 👋
                 </Text>
-                <View
-                  style={{
-                    position: "absolute",
-                    bottom: -4,
-                    left: 0,
-                    right: 0,
-                    height: 3,
-                    backgroundColor: "#ff6b6b",
-                    borderRadius: 2,
-                    opacity: 0.6,
-                  }}
-                />
+                <View style={{ position: "relative" }}>
+                  <Text
+                    style={{
+                      color: "#FFFFFF",
+                      fontSize: 32,
+                      fontWeight: "800",
+                      letterSpacing: -1,
+                      textShadowColor: "rgba(255, 107, 107, 0.3)",
+                      textShadowOffset: { width: 0, height: 2 },
+                      textShadowRadius: 8,
+                    }}
+                  >
+                    anime
+                    <Text style={{ color: "#ff6b6b" }}>Verse</Text>
+                  </Text>
+                  <View
+                    style={{
+                      position: "absolute",
+                      bottom: -4,
+                      left: 0,
+                      right: 0,
+                      height: 3,
+                      backgroundColor: "#ff6b6b",
+                      borderRadius: 2,
+                      opacity: 0.6,
+                    }}
+                  />
+                </View>
               </View>
-            </View>
             </MotiView>
           </View>
         </View>
@@ -172,75 +165,76 @@ const Index = () => {
         }}
       >
         <MotiView
-        from={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{type:'timing',duration:1000}}
+          from={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "timing", duration: 1000 }}
         >
-        <SearchBar />
+          <SearchBar />
         </MotiView>
 
         {/* Top Animes Section */}
         <MotiView
-        from={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{type:'timing',duration:1500}}>
-        <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginBottom: 20,
-              position: "relative",
-            }}
-          >
+          from={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "timing", duration: 1500 }}
+        >
+          <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
             <View
               style={{
-                backgroundColor: "#ff6b6b",
-                width: 4,
-                height: 40,
-                borderRadius: 2,
-                marginRight: 16,
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 20,
+                position: "relative",
               }}
-            />
-            <View style={{ flex: 1 }}>
-              <Text
+            >
+              <View
                 style={{
-                  color: "#FFFFFF",
-                  fontSize: 28,
-                  fontWeight: "700",
-                  letterSpacing: -0.5,
-                  textShadowColor: "rgba(0, 0, 0, 0.3)",
-                  textShadowOffset: { width: 0, height: 2 },
-                  textShadowRadius: 4,
+                  backgroundColor: "#ff6b6b",
+                  width: 4,
+                  height: 40,
+                  borderRadius: 2,
+                  marginRight: 16,
                 }}
-              >
-                Top Animes
-              </Text>
-              <Text
-                style={{
-                  color: "#ff6b6b",
-                  fontSize: 14,
-                  fontWeight: "500",
-                  marginTop: 2,
-                  opacity: 0.8,
-                }}
-              >
-                Most popular right now
-              </Text>
+              />
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: 28,
+                    fontWeight: "700",
+                    letterSpacing: -0.5,
+                    textShadowColor: "rgba(0, 0, 0, 0.3)",
+                    textShadowOffset: { width: 0, height: 2 },
+                    textShadowRadius: 4,
+                  }}
+                >
+                  Top Animes
+                </Text>
+                <Text
+                  style={{
+                    color: "#ff6b6b",
+                    fontSize: 14,
+                    fontWeight: "500",
+                    marginTop: 2,
+                    opacity: 0.8,
+                  }}
+                >
+                  Most popular right now
+                </Text>
+              </View>
             </View>
+            <ScrollView
+              horizontal
+              className="overflow-x-scroll"
+              showsHorizontalScrollIndicator={false}
+            >
+              <View className="flex flex-row gap-x-5">
+                {top?.map((anime, index) => (
+                  <Card anime={anime} key={index} />
+                ))}
+              </View>
+            </ScrollView>
           </View>
-          <ScrollView
-            horizontal
-            className="overflow-x-scroll"
-            showsHorizontalScrollIndicator={false}
-          >
-            <View className="flex flex-row gap-x-5">
-              {top?.map((anime, index) => (
-                <Card anime={anime} key={index} />
-              ))}
-            </View>
-          </ScrollView>
-        </View>
         </MotiView>
         {/* Random Animes Section */}
         <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
@@ -296,7 +290,14 @@ const Index = () => {
             <View className="flex flex-row gap-x-5">
               {!loadRandom
                 ? random?.map((anime, index) => (
-                    <Card anime={anime} key={index} />
+                    <MotiView
+                      key={index}
+                      from={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ type: "timing", duration: 1500 }}
+                    >
+                      <Card anime={anime} />
+                    </MotiView>
                   ))
                 : Array.from({ length: 5 }).map((_, index) => (
                     <CardSkeleton key={index} />
@@ -359,7 +360,14 @@ const Index = () => {
             <View className="flex flex-row gap-x-5">
               {!loadUpcoming
                 ? upcoming?.map((anime, index) => (
-                    <Card anime={anime} key={index} />
+                    <MotiView
+                      key={index}
+                      from={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ type: "timing", duration: 1500 }}
+                    >
+                      <Card anime={anime} />
+                    </MotiView>
                   ))
                 : Array.from({ length: 5 }).map((_, index) => (
                     <CardSkeleton key={index} />
@@ -367,7 +375,7 @@ const Index = () => {
             </View>
           </ScrollView>
         </View>
-        {/* Top Animes Section */}
+        {/* Manga Section */}
         <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
           <View
             style={{
