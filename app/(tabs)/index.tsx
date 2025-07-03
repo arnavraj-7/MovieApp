@@ -1,43 +1,47 @@
 import { View, Text, ScrollView, } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
 import SearchBar from "@/components/searchbar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from 'expo-linear-gradient';
 // import YoutubePlayer from "react-native-youtube-iframe";
 import Card from "@/components/card";
+import useAnime from "../../hooks/useMovie";
 // import useAnime from "../hooks/useanime";
-import {data,top,upcoming} from './../../data/data'
+import {data} from './../../data/data'
+import MangaCard from "@/components/mangaCard";
+import { LoadingScreen } from "@/components/loading";
 
 const Index = () => {
-  // const [loading, setLoading] = useState(false);
-  // const [top,setTop] = useState<Anime[]>([]);
-  // const [upcoming,setUpcoming] = useState<Anime[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [top,setTop] = useState<Anime[]>([]);
+  const [upcoming,setUpcoming] = useState<Anime[]>([]);
+  const [manga,setManga] = useState<Manga[]>([]);
+  const { fetchTop,fetchUpcoming,fetchManga } = useAnime();
+  const [playing, setPlaying] = useState(false);
 
-  // const { fetchTop,fetchUpcoming } = useAnime();
-  // const [playing, setPlaying] = useState(false);
+  useEffect(()=>{
 
-  // useEffect(()=>{
+    console.log("fetching");
 
-  //   console.log("fetching");
+    async function fetch() {
+    setLoading(true);
+    const top:any=  await fetchTop();
+      setTop(top);
+    const upcoming = await fetchUpcoming();
+    setUpcoming(upcoming);
+    const manga = await fetchManga();
+    setManga(manga)
+      setLoading(false);
+  }
+  fetch();
+  },[]);
+  if (loading) {
+    return (
+          <LoadingScreen/>
 
-  //   async function fetch() {
-  //   setLoading(true);
-  //   const top:any=  await fetchTop();
-  //     setTop(top);
-  //   const upcoming = await fetchUpcoming();
-  //   setUpcoming(upcoming);
-  //     setLoading(false);
-  // }
-  // // fetch();
-  // },[]);
-  // if (laoding) {
-  //   return (
-  //     <View className="flex-1 justify-center items-center">
-  //       <Text className="text-white text-5xl">loading</Text>
-  //     </View>
-  //   );
-  // }
+    );
+  }
   return (
     <View style={{ backgroundColor: '#0a0a0a', flex: 1, paddingBottom: 100 }}>
       <Image
@@ -171,7 +175,6 @@ const Index = () => {
             </View>
           </ScrollView>
         </View>
-
         {/* Random Animes Section */}
         <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
           <View style={{ 
@@ -197,7 +200,7 @@ const Index = () => {
                 textShadowOffset: { width: 0, height: 2 },
                 textShadowRadius: 4,
               }}>
-                Random Animes
+                Random Animes and Movies
               </Text>
               <Text style={{
                 color: '#4ecdc4',
@@ -261,6 +264,52 @@ const Index = () => {
             <View className="flex flex-row gap-x-5">
               {upcoming?.map((anime,index) => (
                <Card anime={anime} key={index}/>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
+        {/* Top Animes Section */}
+        <View style={{ marginTop: 40, paddingHorizontal: 16 }}>
+          <View style={{ 
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            marginBottom: 20,
+            position: 'relative'
+          }}>
+            <View style={{
+              backgroundColor: '#ff6b6b',
+              width: 4,
+              height: 40,
+              borderRadius: 2,
+              marginRight: 16,
+            }} />
+            <View style={{ flex: 1 }}>
+              <Text style={{
+                color: '#FFFFFF',
+                fontSize: 28,
+                fontWeight: '700',
+                letterSpacing: -0.5,
+                textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 4,
+              }}>
+                 Manga
+              </Text>
+              <Text style={{
+                color: '#ff6b6b',
+                fontSize: 14,
+                fontWeight: '500',
+                marginTop: 2,
+                opacity: 0.8,
+              }}>
+                Most popular right now
+              </Text>
+            </View>
+          </View>
+          <ScrollView horizontal className="overflow-x-scroll" showsHorizontalScrollIndicator={false}>
+            <View className="flex flex-row gap-x-5">
+              {manga?.map((manga,index) => (
+               <MangaCard manga={manga} key={index}/>
               ))}
             </View>
           </ScrollView>
