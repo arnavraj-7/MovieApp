@@ -21,7 +21,7 @@ return (
         alignItems:'center',
         justifyContent:'center',
     }}>
-      <Ionicons name="search" size={25} color="#AB8BFF" 
+      <Ionicons name="search" size={25} color="#4ecdc4" 
       style={{
             width:30,
             height:30,
@@ -33,7 +33,7 @@ return (
             />
         
         <TextInput
-        placeholder='Search through 300+ movies online'
+        placeholder='Search through animes online'
         style={[
             {
             backgroundColor:"#0F0D23",
