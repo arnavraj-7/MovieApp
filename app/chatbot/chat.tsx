@@ -1,25 +1,34 @@
 import { View, Text, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
+
 
 const Chat = () => {
   const [input, setInput] = useState("");
   
-  const messages = [
-    { role: "user", content: "Tell me about Naruto" },
-    { role: "assistant", content: "Naruto is a legendary manga series by Masashi Kishimoto about a young ninja who dreams of becoming Hokage. The series follows Naruto Uzumaki's journey from an outcast to a hero." },
-    { role: "user", content: "What about One Piece?" },
-    { role: "assistant", content: "One Piece is an epic adventure manga by Eiichiro Oda following Monkey D. Luffy and his crew as they search for the ultimate treasure 'One Piece' to become the Pirate King." }
-  ];
+    const handleSend = async (message: string) => {
+        if(input.trim() === '') return;
+          setInput("");
 
-  const handleSend = (message) => {
-    if (message.trim()) {
-      console.log("Sending message:", message);
-      setInput("");
-      // Your API call logic here
-    }
+      setMessages((prev) => {
+            return [...prev, { role: "user", content: message }];
+        });
+    const res = await axios.post("http://192.168.29.210:8001/chat", {
+      messages: [...messages, { role: "user", content: message }],
+    });
+    console.log(res.data.response);
+
+    setMessages((prev) => {
+      return [...prev, { role: "assistant", content: res.data.response }];
+    });
   };
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
+    []
+  );
+  useEffect(() => {
+    console.log(messages);
+  },[messages])
 
   return (
     <View style={{ flex: 1, backgroundColor: '#000000' }}>
