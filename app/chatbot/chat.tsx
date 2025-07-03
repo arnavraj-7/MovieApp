@@ -3,13 +3,16 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Chat = () => {
+    const [input, setInput] = useState("");
   const handleSend = async (message: string) => {
-    setMessages((prev) => {
-      if (prev === undefined) {
-        return [{ role: "user", content: message }];
-      }
-      return [...prev, { role: "user", content: message }];
-    });
+          setInput("");
+
+      setMessages((prev) => {
+          if (prev === undefined) {
+              return [{ role: "user", content: message }];
+            }
+            return [...prev, { role: "user", content: message }];
+        });
     const res = await axios.post("http://192.168.29.210:8001/chat", {
       messages: [...message, { role: "user", content: message }],
     });
@@ -51,8 +54,10 @@ const Chat = () => {
         placeholder="Type your message here"
         onSubmitEditing={(e) => {
           e.preventDefault();
-          handleSend(e.nativeEvent.text);
+         handleSend(e.nativeEvent.text);
         }}
+        value={input}
+        onChange={(e) => setInput(e.nativeEvent.text)}
         style={{
           position: "absolute",
           bottom: 240,
