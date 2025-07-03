@@ -12,6 +12,7 @@
   "dependencies": {
     "@langchain/core": "^0.3.61",
     "@langchain/google-genai": "^0.2.14",
+    "axios": "^1.10.0",
     "cors": "^2.8.5",
     "dotenv": "^17.0.0",
     "express": "^5.1.0",

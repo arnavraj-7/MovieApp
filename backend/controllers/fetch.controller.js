@@ -4,6 +4,7 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { AIMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
 import dotenv from 'dotenv';
 dotenv.config();
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 
 const model = new ChatGoogleGenerativeAI({
@@ -11,11 +12,24 @@ const model = new ChatGoogleGenerativeAI({
   maxOutputTokens: 2048,
 });
 
-
+const fetchRandom = async (req,res) => {
+    try {
+      sleep(200);
+        const anime = await axios.get('https://api.jikan.moe/v4/anime');
+        // console.log(anime.data);
+        res.status(200).json(anime.data.data);
+        // res.status(200).json({"message":"Success"})
+    } catch (error) {
+        res.status(500).json({"error":error.message})
+        console.log(error);
+    }
+}
 const fetchTop = async (req,res) => {
     try {
+      sleep(400);
+
         const anime = await axios.get('https://api.jikan.moe/v4/top/anime');
-        console.log(anime.data);
+        // console.log(anime.data);
         res.status(200).json(anime.data.data);
         // res.status(200).json({"message":"Success"})
     } catch (error) {
@@ -25,8 +39,9 @@ const fetchTop = async (req,res) => {
 }
 const fetchUpcoming = async (req,res) => {
     try {
+      sleep(1000)
         const anime = await axios.get('https://api.jikan.moe/v4/seasons/upcoming');
-        console.log(anime.data);
+        // console.log(anime.data);
         res.status(200).json(anime.data.data);
         // res.status(200).json({"message":"Success"})
     } catch (error) {
@@ -38,8 +53,8 @@ const fetchbyId = async (req,res) => {
   try {
     console.log("called by id");
     const {id} = req.params;
-    console.log("id:",id);
-    console.log("url:",`https://api.jikan.moe/v4/anime/full`);
+    // console.log("id:",id);
+    // console.log("url:",`https://api.jikan.moe/v4/anime/full`);
     const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/full`);
     const animeData = response.data.data;
     // console.log(animeData);
@@ -57,7 +72,7 @@ const fetchbyId = async (req,res) => {
 const fetchManga = async (req,res) => {
   try {
       const manga = await axios.get('https://api.jikan.moe/v4/manga');
-      console.log(manga.data);
+      // console.log(manga.data);
       res.status(200).json(manga.data.data);
       // res.status(200).json({"message":"Success"})
   } catch (error) {
@@ -70,18 +85,27 @@ const fetchMangabyId = async (req,res) => {
   try {
     console.log("called by id");
     const {id} = req.params;
-    console.log("id:",id);
-    console.log("url:",`https://api.jikan.moe/v4/manga/${id}/full`);
+    // console.log("id:",id);
+    // console.log("url:",`https://api.jikan.moe/v4/manga/${id}/full`);
     const response = await axios.get(`https://api.jikan.moe/v4/manga/${id}/full`);
     const mangaData = response.data.data;
-    // console.log(mangaData);
-    const recom = await axios.get(`https://api.jikan.moe/v4/manga/${id}/recommendations`);
-        mangaData.recommendations = recom.data;
       res.status(200).json(mangaData);
       // res.status(200).json({"message":"Success"})
   } catch (error) {
       res.status(500).json({"error":error.message})
       console.log(error.message);
+  }
+}
+
+
+const search = async (req, res) => {
+  try {
+    const {query} = req.params;
+    const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${query}`);
+    res.status(200).json(response.data.data);
+  } catch (error) {
+    res.status(500).json({"error":error.message})
+    console.log(error.message);
   }
 }
 
@@ -122,4 +146,4 @@ const chat = async (req, res) => {
 
 
 
-export  {fetchTop,fetchUpcoming,fetchbyId,fetchManga,fetchMangabyId,chat}
+export  {fetchRandom,fetchTop,fetchUpcoming,fetchbyId,fetchManga,fetchMangabyId,search,chat}
