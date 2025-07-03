@@ -1,34 +1,39 @@
 {
   "expo": {
-    "name": "MuV",
-    "slug": "MuV",
+    "name": "animeVerse",
+    "slug": "animeverse",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
+    "icon": "./assets/images/app-icon.webp",
     "scheme": "muv",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.arnavraj.animeverse",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "",
+        "foregroundImage": "./assets/images/app-icon.webp",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.arnavraj.animeverse"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": ""
+      "favicon": "./assets/images/app-icon.webp"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "",
+          "image": "./assets/images/app-icon.webp",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -37,6 +42,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "821c588d-a358-4a6f-927d-e39b36bd2b40"
+      }
+    },
+    "owner": "arnavraj"
   }
 }
