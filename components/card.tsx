@@ -7,6 +7,7 @@ const Card = ({anime}:{anime:Anime}) => {
     const upcoming = anime.status==="Not yet aired"?true:false
     const finished = !anime.airing
     const router = useRouter();
+
     const handlePress = ()=>{
         router.push({ pathname: '/anime/[id]', params: { id: anime.mal_id.toString() } })
     }
@@ -162,7 +163,7 @@ const Card = ({anime}:{anime:Anime}) => {
                     </Text>
                   </View> 
 
-                  {/* Type and Episodes */}
+                  {/* Type and Episodes/Chapters */}
                    <Text style={{
                     color: '#aaaaaa',
                     fontSize: 11,
