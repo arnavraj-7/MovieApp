@@ -2,6 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity, Dimensions } from "react-nati
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { MotiView } from "moti";
 
 const { width } = Dimensions.get('window');
 
@@ -37,7 +38,10 @@ const AnimeSenseiLanding = () => {
   ];
 
   return (
+    
+    
     <View style={{ flex: 1, backgroundColor: '#000000' }}>
+      <MotiView className="flex-1" from={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ type: 'timing', duration: 1000 }}>
       <SafeAreaView style={{ flex: 1, backgroundColor: '#000000' }}>
         <ScrollView 
           style={{ flex: 1,
@@ -278,7 +282,11 @@ const AnimeSenseiLanding = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+</MotiView>
     </View>
+    
+    
+    
   );
 };
 
