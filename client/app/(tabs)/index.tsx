@@ -293,12 +293,9 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex flex-row gap-x-5">
-              {!loadRandom
-                ? random?.map((anime, index) => (
-                    <Card anime={anime} key={index} />
-                  ))
-                : Array.from({ length: 5 }).map((_, index) => (
-                    <CardSkeleton key={index} />
+          
+                { random?.map((anime, index) => (
+                    <Card anime={anime} loading={loadRandom} key={index} />
                   ))}
             </View>
           </ScrollView>
@@ -356,13 +353,10 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex flex-row gap-x-5">
-              {!loadUpcoming
-                ? upcoming?.map((anime, index) => (
-                    <Card anime={anime} key={index} />
+              {upcoming?.map((anime, index) => (
+                    <Card anime={anime} loading={loadUpcoming} key={index} />
                   ))
-                : Array.from({ length: 5 }).map((_, index) => (
-                    <CardSkeleton key={index} />
-                  ))}
+                }
             </View>
           </ScrollView>
         </View>
@@ -418,11 +412,8 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex flex-row gap-x-5">
-              {loadManga
-                ? Array.from({ length: 5 }).map((_, index) => (
-                    <CardSkeleton key={index} />
-                  ))
-                : manga?.map((manga, index) => (
+             {
+              manga?.map((manga, index) => (
                     <MangaCard manga={manga} key={index} />
                   ))}
             </View>
