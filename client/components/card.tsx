@@ -3,7 +3,6 @@ import React from "react";
 import { Image } from "expo-image";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
-import { Skeleton } from "moti/skeleton";
 const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
   const upcoming = anime.status === "Not yet aired" ? true : false;
   const finished = !anime.airing;
@@ -16,7 +15,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
     });
   };
   return (
-    <Skeleton.Group show={loading || false}>
     <Pressable
       key={anime.mal_id}
       style={{
@@ -42,12 +40,7 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
 
       <View style={{ position: "relative" }}>
 
-        <Skeleton
-          height={200}
-          width={"100%"}
-          radius={"square"}
-          colorMode="dark"
-        >
+        
           <Image
             className="object-cover"
             source={
@@ -61,7 +54,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
               borderTopRightRadius: 16,
             }}
           />
-        </Skeleton>
 
         {/* Status Badge - Positioned on Image */}
         <View
@@ -111,7 +103,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
         }}
       >
         {/* Title */}
-        <Skeleton colorMode="dark" height={20} radius={5}>
           <Text
             style={{
               color: "#FFFFFF",
@@ -125,7 +116,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
           >
             {anime.title}
           </Text>
-        </Skeleton>
 
         {/* Rating and Rank Row */}
 
@@ -137,7 +127,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
             marginBottom: 4,
           }}
         >
-          <Skeleton colorMode="dark" height={12} radius={5}>
             <View
               style={{
                 flexDirection: "row",
@@ -162,9 +151,7 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
                 {anime.score}
               </Text>
             </View>
-          </Skeleton>
 
-          <Skeleton colorMode="dark" height={12} radius={5}>
             <View
               style={{
                 backgroundColor: "#2a2a2a",
@@ -185,7 +172,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
                 #{anime.rank}
               </Text>
             </View>
-          </Skeleton>
         </View>
 
         {/* Favorites and Type Info */}
@@ -196,7 +182,6 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
               marginBottom: 8,
             }}
           >
-            <Skeleton colorMode="dark" height={12} radius={5}>
             <Text
               style={{
                 color: "#888888",
@@ -209,9 +194,7 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
                 : anime.favorites}
               k favorites
             </Text>
-        </Skeleton>
           </View>
-        <Skeleton colorMode="dark" height={12} width={50} radius={5}>
           {/* Type and Episodes/Chapters */}
           <Text
             style={{
@@ -224,10 +207,8 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
             {anime.type} • {anime.episodes}
             {anime.type === "anime" ? "" : " episodes"}
           </Text>
-        </Skeleton>
 
         {/* Genre Tags */}
-        <Skeleton colorMode='dark' height={12} radius={5}>
 
         <View
           style={{
@@ -285,10 +266,8 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
             </View>
           )}
         </View>
-          </Skeleton>
       </View>
     </Pressable>
-              </Skeleton.Group>
   );
 };
 
