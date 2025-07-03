@@ -36,6 +36,7 @@ const fetchUpcoming = async (req,res) => {
 }
 const fetchbyId = async (req,res) => {
   try {
+    console.log("called by id");
     const {id} = req.params;
     console.log("id:",id);
     console.log("url:",`https://api.jikan.moe/v4/anime/full`);
@@ -45,6 +46,38 @@ const fetchbyId = async (req,res) => {
     const recom = await axios.get(`https://api.jikan.moe/v4/anime/${id}/recommendations`);
         animeData.recommendations = recom.data;
       res.status(200).json(animeData);
+      // res.status(200).json({"message":"Success"})
+  } catch (error) {
+      res.status(500).json({"error":error.message})
+      console.log(error.message);
+  }
+}
+
+
+const fetchManga = async (req,res) => {
+  try {
+      const manga = await axios.get('https://api.jikan.moe/v4/manga');
+      console.log(manga.data);
+      res.status(200).json(manga.data.data);
+      // res.status(200).json({"message":"Success"})
+  } catch (error) {
+      res.status(500).json({"error":error.message})
+      console.log(error);
+  }
+}
+
+const fetchMangabyId = async (req,res) => {
+  try {
+    console.log("called by id");
+    const {id} = req.params;
+    console.log("id:",id);
+    console.log("url:",`https://api.jikan.moe/v4/manga/${id}/full`);
+    const response = await axios.get(`https://api.jikan.moe/v4/manga/${id}/full`);
+    const mangaData = response.data.data;
+    // console.log(mangaData);
+    const recom = await axios.get(`https://api.jikan.moe/v4/manga/${id}/recommendations`);
+        mangaData.recommendations = recom.data;
+      res.status(200).json(mangaData);
       // res.status(200).json({"message":"Success"})
   } catch (error) {
       res.status(500).json({"error":error.message})
@@ -64,8 +97,10 @@ const chat = async (req, res) => {
     messages.map((message) => {
         
         if(message.role === 'assistant'){
+          console.log("pushing ai message",message.content);
             formattedMessages.push(new AIMessage(message.content));
         }else if(message.role==='user'){
+            console.log("pushing human message",message.content);
             formattedMessages.push(new HumanMessage(message.content));
         }
     });
@@ -87,4 +122,4 @@ const chat = async (req, res) => {
 
 
 
-export  {fetchTop,fetchUpcoming,fetchbyId,chat}
+export  {fetchTop,fetchUpcoming,fetchbyId,fetchManga,fetchMangabyId,chat}
