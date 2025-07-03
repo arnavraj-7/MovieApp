@@ -38,16 +38,17 @@ const Index = () => {
         setLoading(false);
         await delay(1000);
         
-        const upcoming: Anime[] = await fetchUpcoming();
-        setUpcoming(upcoming);
-        setLoadUpcoming(false);
-
-        await delay(1000);
         
         const random: Anime[] = await fetchRandom();
         setRandom(random);
         setLoadRandom(false);
         await delay(3000);
+        
+        const upcoming: Anime[] = await fetchUpcoming();
+        setUpcoming(upcoming);
+        setLoadUpcoming(false);
+
+        await delay(1000);
         
         const manga: Manga[] = await fetchManga();
         setManga(manga);
@@ -293,9 +294,12 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex flex-row gap-x-5">
-          
-                { random?.map((anime, index) => (
-                    <Card anime={anime} loading={loadRandom} key={index} />
+              {!loadRandom
+                ? random?.map((anime, index) => (
+                    <Card anime={anime} key={index} />
+                  ))
+                : Array.from({ length: 5 }).map((_, index) => (
+                    <CardSkeleton key={index} />
                   ))}
             </View>
           </ScrollView>
@@ -353,10 +357,13 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex flex-row gap-x-5">
-              {upcoming?.map((anime, index) => (
-                    <Card anime={anime} loading={loadUpcoming} key={index} />
+              {!loadUpcoming
+                ? upcoming?.map((anime, index) => (
+                    <Card anime={anime} key={index} />
                   ))
-                }
+                : Array.from({ length: 5 }).map((_, index) => (
+                    <CardSkeleton key={index} />
+                  ))}
             </View>
           </ScrollView>
         </View>
@@ -412,8 +419,11 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex flex-row gap-x-5">
-             {
-              manga?.map((manga, index) => (
+              {loadManga
+                ? Array.from({ length: 5 }).map((_, index) => (
+                    <CardSkeleton key={index} />
+                  ))
+                : manga?.map((manga, index) => (
                     <MangaCard manga={manga} key={index} />
                   ))}
             </View>
