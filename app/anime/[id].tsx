@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router/build/hooks";
-import useAnime from "../hooks/useMovie";
+import useAnime from "../../hooks/useMovie";
 import { Image } from "expo-image";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Link } from "expo-router";
@@ -338,7 +338,7 @@ const MovieDetails = () => {
   useEffect(() => {
     async function fetch() {
       setLoading(true);
-      const anime = await fetchbyId(id);
+      const anime = await fetchbyId(id.toString());
       setAnime(anime);
       setLoading(false);
     }
