@@ -110,3 +110,23 @@ interface Anime {
   demographics: AnimeGenre[];
   recommendations: {data:recom[]};
 }
+
+
+interface Manga{
+  mal_id:number;
+  url:string;
+  images:AnimeImages;
+  title_english:string;
+  title_japanese:string;
+  title:string;
+  type:string;
+  chapters:number;
+  volumes:number;
+  status:string;
+  published:string;
+  score:number;
+  synopsis:string;
+  background:string;
+  genres:AnimeGenre[];
+  recommendations:{data:recom[]};
+}
