@@ -148,7 +148,7 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
                   marginLeft: 2,
                 }}
               >
-                {anime.score}
+                {!upcoming?anime.score:"-"}
               </Text>
             </View>
 
@@ -169,7 +169,7 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
                   fontWeight: "600",
                 }}
               >
-                #{anime.rank}
+                #{!upcoming?anime.rank:"-"}
               </Text>
             </View>
         </View>

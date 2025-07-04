@@ -593,9 +593,13 @@ const MovieDetails = () => {
             className="pr-8"
           >
             <View className="gap-x-4 flex flex-row">
-              {anime.recommendations.data.map((recom, index) => (
+              {anime.recommendations.data.length>0?(anime.recommendations.data.map((recom, index) => (
                 <RecomCard anime={recom.entry as Anime} key={index} />
-              ))}
+              ))):(
+                <Text className="text-white">
+                  No Recommendations
+                </Text>
+              )}
             </View>
           </ScrollView>
         </View>

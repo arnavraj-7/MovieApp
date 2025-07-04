@@ -14,7 +14,7 @@ const Chat = () => {
       setMessages((prev) => {
             return [...prev, { role: "user", content: message }];
         });
-    const res = await axios.post("http://192.168.29.210:8001/chat", {
+    const res = await axios.post("https://animeverse-awjb.onrender.com/chat", {
       messages: [...messages, { role: "user", content: message }],
     });
     console.log(res.data.response);

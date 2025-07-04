@@ -4,8 +4,9 @@ import axios from 'axios'
 
 
 const useAnime = () => {
-  let url = '';
-  process.env.MODE!="dev"? url='https://animeverse-awjb.onrender.com': url='http://192.168.29.210:8001';
+ 
+ const url='https://animeverse-awjb.onrender.com';
+  //  url='http://192.168.29.210:8001';
   const fetchRandom = async () => {
 
     // console.log("hello");

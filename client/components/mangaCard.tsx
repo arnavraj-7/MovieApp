@@ -170,7 +170,7 @@ const MangaCard = ({manga}:{manga:manga}) => {
                     fontWeight: '500',
                     marginBottom: 10,
                   }}>
-                    {manga.type} • {manga.chapters}
+                   {manga.chapters}
                     {manga.type === "manga" ? "" : " Chapters"}
                   </Text> 
 
