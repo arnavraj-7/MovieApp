@@ -14,7 +14,8 @@ const Search = () => {
   const handleSearch = async() => {
     setResults([]);
     setLoading(true);
-   const res =  await axios.get(`http://192.168.29.210:8001/search/${searchQuery}`);
+    const url = 'https://animeverse-awjb.onrender.com';
+    const res =  await axios.get(`${url}/search/${searchQuery}`);
    setResults(res.data);
    setLoading(false);
 
