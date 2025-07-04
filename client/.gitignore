@@ -20,6 +20,10 @@ expo-env.d.ts
 
 # Metro
 .metro-health-check*
+# Expo Prebuild - ignore generated native projects
+/android
+/ios
+
 
 # debug
 npm-debug.*
