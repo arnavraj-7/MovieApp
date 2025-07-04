@@ -18,7 +18,7 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
     <Pressable
       key={anime.mal_id}
       style={{
-        height: 350,
+        height: 380,
         width: 150,
         backgroundColor: "#1a1a1a",
         borderRadius: 16,
@@ -108,9 +108,9 @@ const Card = ({ anime,loading }: { anime: Anime,loading?:boolean }) => {
               color: "#FFFFFF",
               fontSize: 14,
               fontWeight: "700",
-              lineHeight: 18,
+              lineHeight: 16,
               marginBottom: 8,
-              height: 30,
+              height: 35,
             }}
             numberOfLines={2}
           >
