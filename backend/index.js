@@ -3,7 +3,7 @@ import { configDotenv } from 'dotenv';
 configDotenv();
 import CORS from 'cors';
 import router from './routes/fetch.routes.js';
-import connectDB from './utils/db.js';
+
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use('/',router)
 
 app.listen(PORT,async() => {
-    await connectDB();
+
     console.log(`Server is running on port ${PORT}`);
 });
 
